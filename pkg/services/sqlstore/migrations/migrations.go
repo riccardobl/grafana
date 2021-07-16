@@ -42,6 +42,7 @@ func AddMigrations(mg *Migrator) {
 	ualert.AddDashAlertMigration(mg)
 	addLibraryElementsMigrations(mg)
 	ualert.RerunDashAlertMigration(mg)
+	addKVStoreMigrations(mg)
 }
 
 func addMigrationLogMigrations(mg *Migrator) {
