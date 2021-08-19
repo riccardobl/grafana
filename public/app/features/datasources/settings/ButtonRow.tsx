@@ -16,29 +16,27 @@ export interface Props {
 
 const ButtonRow: FC<Props> = ({ isReadOnly, onDelete, onSubmit, onTest }) => {
   const canEditDataSources = !isReadOnly && contextSrv.hasPermission(AccessControlAction.DataSourcesWrite);
-  const canDeleteDataSources = contextSrv.hasPermission(AccessControlAction.DataSourcesDelete);
+  const canDeleteDataSources = !isReadOnly && contextSrv.hasPermission(AccessControlAction.DataSourcesDelete);
 
   return (
     <div className="gf-form-button-row">
       <LinkButton variant="secondary" fill="outline" href={`${config.appSubUrl}/datasources`}>
         Back
       </LinkButton>
-      {canDeleteDataSources && (
-        <Button
-          type="button"
-          variant="destructive"
-          disabled={isReadOnly}
-          onClick={onDelete}
-          aria-label={selectors.pages.DataSource.delete}
-        >
-          Delete
-        </Button>
-      )}
+      <Button
+        type="button"
+        variant="destructive"
+        disabled={!canDeleteDataSources}
+        onClick={onDelete}
+        aria-label={selectors.pages.DataSource.delete}
+      >
+        Delete
+      </Button>
       {canEditDataSources && (
         <Button
           type="submit"
           variant="primary"
-          disabled={isReadOnly}
+          disabled={!canEditDataSources}
           onClick={(event) => onSubmit(event)}
           aria-label={selectors.pages.DataSource.saveAndTest}
         >
