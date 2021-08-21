@@ -422,7 +422,7 @@ export function buildLayout(props: Props): BigValueLayout {
   const useWideLayout = width / height > 2.5;
 
   if (useWideLayout) {
-    if (height > 50 && !!sparkline) {
+    if (/*height > 50 &&*/ !!sparkline) {
       return new WideWithChartLayout(props);
     } else {
       return new WideNoChartLayout(props);
@@ -430,7 +430,7 @@ export function buildLayout(props: Props): BigValueLayout {
   }
 
   // stacked layouts
-  if (height > 100 && !!sparkline) {
+  if (/*height > 100&& */ !!sparkline) {
     return new StackedWithChartLayout(props);
   } else {
     return new StackedWithNoChartLayout(props);
